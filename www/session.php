@@ -1,8 +1,8 @@
 <?php
   $user_id = NULL;
   if (isset($_COOKIE['session_token'])) {
-    // TODO decrypt cookie, verify user id in database and set user id
-    $user_id = "1";
+    // TODO decrypt token into id
+    $user_id = $_COOKIE['session_token'];
   }
   
   if (is_null($user_id)) {

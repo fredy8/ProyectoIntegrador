@@ -8,12 +8,26 @@
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $invalid_email = !valid_email($email);
-    $invalid_password = !valid_password($password);
+    $login_error = false;
+    $email = $conn->real_escape_string($email);
 
-    if (!$invalid_email && !$invalid_password) {
-      setcookie("session_token", $email);
-      header("Location: /home.php");
+    if ($result = $conn->query("select id, approved, password from users where email='$email'")) {
+      if ($result->num_rows === 0) {
+        $login_error = true;
+      } else {
+        $row = $result->fetch_assoc();
+        if (!password_verify($password, $row["password"])) {
+          $login_error = true;
+        } else if (!$row["approved"]) {
+          $not_approved = true;
+        } else {
+          // TODO encrypt user id
+          setcookie("session_token", $row["id"]);
+          header("Location: /home.php");
+        }
+      }
+    } else {
+      die("Ocurrió un error al realizar el registro.");
     }
   }
 
@@ -24,20 +38,19 @@
   <form action="/login.php" method="POST">
     Email:<br>
     <input type="text" name="email">
-    <?php
-      if ($invalid_email) {
-        echo 'Correo electrónico inválido.';
-      }
-    ?>
     <br>
     Password:<br>
     <input type="password" name="password">
+    <br>
     <?php
-      if ($invalid_password) {
-        echo 'Contraseña inválida. Debe contener por lo menos 5 caracteres.';
+      if ($login_error) {
+        echo 'Usuario o contraseña incorrecta.';
+        echo '<br>';
+      } else if ($not_approved) {
+        echo 'La cuenta aún no ha sido aprovada por el administrador.';
+        echo '<br>';
       }
     ?>
-    <br>
     <input type="submit" value="Log in">
   </form>
 </body>

@@ -11,14 +11,14 @@
     $invalid_email = !valid_email($email);
     $invalid_password = !valid_password($password);
 
-    $email = $conn->real_escape_string($email);
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
     if (!$invalid_email && !$invalid_password) {
-      if ($result = $conn->query("insert into users(email, password) values ('$email', '$password')")) {
+      $email = $conn->real_escape_string($email);
+      $password = password_hash($password, PASSWORD_DEFAULT);
+
+      if ($conn->query("insert into users(email, password) values ('$email', '$password')")) {
         header("Location: /registration_requested.php");
       } else {
-        die("Ocurrió un error al realizar el registro.");
+        $register_error = true;
       }
     }
   }
@@ -43,6 +43,12 @@
       }
     ?>
     <br>
+    <?php
+      if ($register_error) {
+        echo 'Ya existe un usuario con el correo electrónico.';
+        echo '<br>';
+      }
+    ?>
     <input type="submit" value="Registrar">
   </form>
 </body>
