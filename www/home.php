@@ -3,8 +3,7 @@
 ?>
 
 <body>
-  <a href="login.php">Login</a>
-  <a href="register.php">Register</a>
+  You are logged in.
 </body>
 
 <?php
