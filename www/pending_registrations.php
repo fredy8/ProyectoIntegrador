@@ -11,7 +11,7 @@
   <?php
     function renderRequest($email) {
       echo '<tr>';
-      echo '<form action="/accept_request.php" method="POST">';
+      echo '<form action="/handle_request.php" method="POST">';
       echo '<input type="text" name="email" value="' . $email . '" readonly>';
       echo '<input type="radio" name="approve" value="1" checked>Aprobar';
       echo '<input type="radio" name="approve" value="0">Denegar';

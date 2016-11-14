@@ -10,13 +10,19 @@
 
   if ($approve === "1") {
     if ($result = $conn->query("update users set approved=1 where email='$email'")) {
-      // TODO send email
+      mail($email,
+        "Registro aprobado",
+        "Tu solicitud registro de Circulo Virtuoso ha sido aprobada.",
+        "From: noreply@circulovirtuoso.com");
     } else {
       die("Ocurrió un error.");
     }
   } else {
     if ($result = $conn->query("delete from users where email='$email'")) {
-      // TODO send email
+      mail($email,
+        "Registro denegado",
+        "Tu solicitud registro de Circulo Virtuoso ha sido denegada.",
+        "From: noreply@circulovirtuoso.com");
     } else {
       die("Ocurrió un error.");
     }
