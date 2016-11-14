@@ -3,6 +3,10 @@
 
   include 'php_header.php';
   include 'validation.php';
+
+  $invalid_email = false;
+  $invalid_password = false;
+  $register_error = false;
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST["email"]; 
