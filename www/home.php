@@ -5,6 +5,8 @@
 ?>
 
 <body>
+  <?php include 'menu.php'; ?>
+  <br>
   You are logged in.
 </body>
 

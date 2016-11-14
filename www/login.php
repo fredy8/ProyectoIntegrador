@@ -27,7 +27,7 @@
         }
       }
     } else {
-      die("Ocurrió un error al realizar el registro.");
+      die("Ocurrió un error.");
     }
   }
 
