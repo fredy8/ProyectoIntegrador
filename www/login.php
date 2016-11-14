@@ -4,11 +4,13 @@
   include 'php_header.php';
   include 'validation.php';
 
+  $login_error = false;
+  $not_approved = false;
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $login_error = false;
     $email = $conn->real_escape_string($email);
 
     if ($result = $conn->query("select id, approved, password from users where email='$email'")) {
