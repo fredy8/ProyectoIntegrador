@@ -12,6 +12,10 @@
     field($label, $error, '<input type="text" name="' . $name . '">');
   }
 
+  function textarea_input($name, $label, $error) {
+    field($label, $error, '<textarea rows="4" cols="50" name="' . $name . '"></textarea>');
+  }
+
   function number_input($name, $label, $error, $min = NULL, $max = NULL) {
     $input = '<input type="number" ';
     if ($min) {
