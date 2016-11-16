@@ -1,12 +1,27 @@
-<? php
+<?php
  function field($label, $error, $input) {
     echo $label . ':';
     echo $input;
+    if ($error) {
+      echo '<font color="red">' . $error . "</font>";
+    }
     echo '<br>';
   }
 
   function textbox_input($name, $label, $error) {
     field($label, $error, '<input type="text" name="' . $name . '">');
+  }
+
+  function number_input($name, $label, $error, $min = NULL, $max = NULL) {
+    $input = '<input type="number" ';
+    if ($min) {
+      $input = $input . 'min="' . $min . '" ';
+    }
+    if ($max) {
+      $input = $input . 'max="' . $max . '" ';
+    }
+    $input = $input . 'name="' . $name . '">';
+    field($label, $error, $input);
   }
 
   function date_input($name, $label, $error) {
