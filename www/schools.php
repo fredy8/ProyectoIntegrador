@@ -6,10 +6,15 @@
 
   function loadTable() {
     global $conn;
-    
-    if ($rows = $conn->query("select nombre, director, nivel, turno, sostenimiento, alumnos from escuelas")) {
-      $header = ['Nombre', 'Director', 'Nivel', 'Turno', 'Sostenimiento', 'Alumnos'];
-      drawTable($header, $rows);
+
+    if ($rows = $conn->query("select id, nombre, director, nivel, turno, sostenimiento, alumnos from escuelas")) {
+      $header = ['ID', 'Nombre', 'Director', 'Nivel', 'Turno', 'Sostenimiento', 'Alumnos'];
+      $links = [];
+      foreach ($rows as $row) {
+        $id = $row['id'];
+        array_push($links, "school.php?id=$id");
+      }
+      drawTable($header, $rows, $links);
     } else {
       echo 'Error loading table';
     }    
