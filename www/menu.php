@@ -4,4 +4,5 @@
     echo '<a href="/pending_registrations.php">Registros Pendientes</a>';
   }
 ?>
+<a href="/schools.php">Escuelas</a>
 <a href="/logout.php">Salir</a>
