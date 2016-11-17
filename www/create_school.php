@@ -122,6 +122,7 @@
         echo '<br>';
       }
     ?>
+    <a href="schools.php">Cancelar</a>
     <input type="submit" value="Crear">
   </form>
 </body>
