@@ -53,7 +53,7 @@
           echo 'Usuario o contraseña incorrecta.';
           echo '<br>';
         } else if ($not_approved) {
-          echo 'La cuenta aún no ha sido aprovada por el administrador.';
+          echo 'La cuenta aún no ha sido aprobada por el administrador.';
           echo '<br>';
         }
       ?>

@@ -9,17 +9,20 @@
   $register_error = false;
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST["name"]; 
     $email = $_POST["email"]; 
     $password = $_POST["password"];
 
+    $invalid_name = empty($name);
     $invalid_email = !valid_email($email);
     $invalid_password = !valid_password($password);
 
     if (!$invalid_email && !$invalid_password) {
+      $name = $conn->real_escape_string($name);
       $email = $conn->real_escape_string($email);
       $password = password_hash($password, PASSWORD_DEFAULT);
 
-      if ($conn->query("insert into users(email, password) values ('$email', '$password')")) {
+      if ($conn->query("insert into users(name, email, password) values ('$name', '$email', '$password')")) {
         header("Location: /registration_requested.php");
       } else {
         $register_error = true;
@@ -33,6 +36,16 @@
   <div class="container-fluid">
     <form style="max-width: 500px; padding: 15px; margin: 0px auto;" action="/register.php" method="POST">
       <h1>Registro</h1>
+      <div class="form-group">
+        <label class="control-label" for="name">Nombre</label>
+        <?php
+          if ($invalid_email) {
+            echo 'Nombre inválido.';
+          }
+        ?>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+
       <div class="form-group">
         <label class="control-label" for="email">Email</label>
         <?php

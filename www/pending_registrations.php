@@ -10,20 +10,21 @@
   <div class="container">
     <br>
     <?php
-      function renderRequest($email) {
+      function renderRequest($name, $email) {
         echo '<tr>';
         echo '<form action="/handle_request.php" method="POST">';
-        echo '<input type="text" name="email" value="' . $email . '" readonly>';
-        echo '<input type="radio" name="approve" value="1" checked>Aprobar';
-        echo '<input type="radio" name="approve" value="0">Denegar';
-        echo '<button type="submit">Enviar</button>';
+        echo '<input style="margin: 10px;" type="text" name="name" value="' . $name . '" readonly>';
+        echo '<input style="margin: 10px;" type="text" name="email" value="' . $email . '" readonly>';
+        echo '<input style="margin: 10px;" type="radio" name="approve" value="1" checked>Aprobar';
+        echo '<input style="margin: 10px;" type="radio" name="approve" value="0">Denegar';
+        echo '<button style="margin: 10px;" type="submit" class="btn btn-success">Enviar</button>';
         echo '</form>';
         echo '</tr>';
       }
 
-      if ($result = $conn->query("select email from users where approved=0")) {
+      if ($result = $conn->query("select name, email from users where approved=0")) {
         while ($row = $result->fetch_assoc()) {
-          renderRequest($row["email"]);
+          renderRequest($row["name"], $row["email"]);
         }
       } else {
         die("Ocurrió un error.");
