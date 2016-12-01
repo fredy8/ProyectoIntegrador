@@ -33,14 +33,31 @@
 
     $start = new DateTime();
     $start->setTimestamp(strtotime($event["inicio"]));
+    $end = new DateTime();
+    $end->setTimestamp(strtotime($event["fin"]));
     
-    //$iFecha = $event["fecha"];
-    //$iHora_inicio = $event["empresa"];
-    //$iHora_inicio_hour = $event["empresa"];
-    //$iHora_inicio_minute = $event["empresa"];
-    //$iHora_fin = $event["empresa"];
-    //$iHora_fin_hour = $event["empresa"];
-    //$iHora_fin_minute = $event["empresa"];
+    $iFecha = $start->format("Y-m-d");
+
+    function getAMPM($date) {
+      $hr = intval($date->format("H"));
+      if ($hr >= 12 && hr < 24)
+        return "PM";
+      return "AM";
+    }
+
+    function getHour($date) {
+      $hr = intval($date->format("H"));
+      if ($hr > 12)
+        $hr -= 12;
+      return $hr . "";
+    }
+
+    $iHora_inicio = getAMPM($start);
+    $iHora_inicio_hour = getHour($start);
+    $iHora_inicio_minute = $start->format("i");
+    $iHora_fin = getAMPM($end);
+    $iHora_fin_hour = getHour($end);
+    $iHora_fin_minute = $end->format("i");
     
     $iLugar = $event["lugar"];
     $iTematica = $event["tematica"];

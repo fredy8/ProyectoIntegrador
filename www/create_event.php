@@ -70,7 +70,7 @@
       $error_nombre = "El nombre del evento no puede estar vacio";
     if (empty($_POST["objetivo"]))
       $error_objetivo = "Objetivo no puede estar vacio";
-    if (date_parse($_POST["fecha"]) === false)
+    if (empty($_POST["fecha"]) || date_parse($_POST["fecha"]) === false)
       $error_fecha = "Fecha inválida";
     if ((intval($_POST["hora_inicio_hour"]) == 0 && $_POST["hora_inicio_hour"] != "0") ||
         (intval($_POST["hora_inicio_minute"]) == 0 && $_POST["hora_inicio_minute"] != "0"))
@@ -102,7 +102,7 @@
       $error_inversion_monetaria = "La inversión monetaria debe de ser un número";
     if (intval($_POST["inversion_monetaria_escuela"]) == 0 && $_POST["inversion_monetaria_escuela"] != "0")
       $error_inversion_monetaria_escuela = "La inversión monetaria debe de ser un número";
-    if (empty($_POST["correo_electronico"]))
+    if (empty($_POST["correo_electronico"]) && !editing)
       $error_correo_electronico = "El correo electrónico no puede estar vacio";
 
     if (empty($error_escuela) && empty($error_empresa) && empty($error_gestion) &&
@@ -128,27 +128,27 @@
             $year = "0" . $year;
 
           $month = $datearray['month'];
-          if ($month < 10)
+          while (strlen($month) < 2)
             $month = "0" . $month;
 
           $day = $datearray['day'];
-          if ($day < 10)
+          while (strlen($day) < 2)
             $day = "0" . $day;
 
           $inicio_hour = $_POST['hora_inicio_hour'];
-          if ($inicio_hour < 10)
+          while (strlen($inicio_hour) < 2)
             $inicio_hour = "0" . $inicio_hour;
 
           $inicio_minute = $_POST['hora_inicio_minute'];
-          if ($inicio_minute < 10)
+          while (strlen($inicio_minute) < 2)
             $inicio_minute = "0" . $inicio_minute;
 
           $fin_hour = $_POST['hora_fin_hour'];
-          if ($fin_hour < 10)
+          while (strlen($fin_hour) < 2)
             $fin_hour = "0" . $fin_hour;
 
           $fin_minute = $_POST['hora_fin_minute'];
-          if ($fin_minute < 10)
+          while (strlen($fin_minute) < 2)
             $fin_minute = "0" . $fin_minute;
 
           $datetime_inicio = $year . "-" . $month . "-" . $day . " " . $inicio_hour . ":" . $inicio_minute . ":00";
@@ -174,9 +174,19 @@
           $inversion_monetaria_escuela = intval($_POST["inversion_monetaria_escuela"]);
           $inversion_especie_escuela = $conn->real_escape_string($_POST["inversion_especie_escuela"]);
           $otro_tipo_donacion = $conn->real_escape_string($_POST["otra_donacion"]);
-          $correo_electronico = $conn->real_escape_string($_POST["correo_electronico"]);
 
-          if ($conn->query("insert into eventos (escuela_id, empresa, gestion, nombre, objetivo, inicio,
+          if ($editing) {
+            $query = "update eventos set escuela_id=$escuela_id, empresa='$empresa', gestion='$gestion', nombre='$nombre',
+              objetivo='$objetivo', inicio=('$datetime_inicio'), fin=('$datetime_fin'), lugar='$lugar', tematica='$tematica',
+              descripcion='$descripcion', num_alumnos=$num_alumnos, num_padres=$num_padres, num_personal=$num_personal,
+              num_voluntarios=$num_voluntarios, institucion='$institucion', num_alumnos_servicio=$num_alumnos_servicio,
+              universidad='$universidad', empresario=$empresario, inversion_monetaria_empresa=$inversion_monetaria, 
+              inversion_especie_empresa='$inversion_especie', inversion_monetaria_escuela='$inversion_monetaria_escuela',
+              inversion_especie_escuela='$inversion_especie_escuela', otro_tipo_donacion='$otro_tipo_donacion' where id=$id";
+          } else {
+            $correo_electronico = $conn->real_escape_string($_POST["correo_electronico"]);
+
+            $query = "insert into eventos (escuela_id, empresa, gestion, nombre, objetivo, inicio,
               fin, lugar, tematica, descripcion, num_alumnos, num_padres, num_personal, num_voluntarios,
               institucion, num_alumnos_servicio, universidad, empresario, inversion_monetaria_empresa, 
               inversion_especie_empresa, inversion_monetaria_escuela, inversion_especie_escuela, otro_tipo_donacion,
@@ -184,7 +194,10 @@
               '$lugar', '$tematica', '$descripcion', $num_alumnos, $num_padres, $num_personal, $num_voluntarios,
               '$institucion', $num_alumnos_servicio, '$universidad', $empresario, $inversion_monetaria,
               '$inversion_especie', $inversion_monetaria_escuela, '$inversion_especie_escuela', '$otro_tipo_donacion',
-              '$correo_electronico')")) {
+              '$correo_electronico')";
+          }
+
+          if ($conn->query($query)) {
             header("Location: /events.php");
           } else {
             die($conn->error);
