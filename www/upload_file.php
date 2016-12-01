@@ -28,9 +28,7 @@
 
   if ($error) {
     header("Location: /home.php");
-  }
-
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_FILES['userfile']['size'] > 0) {
       $fileName = $_FILES['userfile']['name'];
       $tmpName  = $_FILES['userfile']['tmp_name'];
