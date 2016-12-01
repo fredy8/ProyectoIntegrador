@@ -8,7 +8,7 @@
     global $conn;
 
     if ($rows = $conn->query("select ev.id, ev.nombre, es.nombre as nombre_escuela, ev.empresa, ev.lugar, ev.inicio from eventos as ev join escuelas as es on ev.escuela_id = es.id")) {
-      $header = ['ID', 'Nombre', 'Empresa', 'Lugar', 'Fecha'];
+      $header = ['ID', 'Nombre', 'Escuela', 'Empresa', 'Lugar', 'Fecha'];
       $links = [];
       foreach ($rows as $row) {
         $id = $row['id'];

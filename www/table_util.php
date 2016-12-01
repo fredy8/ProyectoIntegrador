@@ -1,16 +1,17 @@
 <?php
 
   function drawTable($header, $rows, $links = NULL) {
-    echo '<table style="width:50%">';
-    echo '<tr>';
+    echo '<table class="table table-striped" style="width:100%">';
+    echo '<thead>';
     foreach ($header as $cell) {
       echo '<th>' . $cell . '</th>';
     }
-    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
     $i = 0;
     foreach ($rows as $row) {
       if ($links) {
-        echo '<tr onClick="window.document.location=\'' . $links[$i] . '\';">';
+        echo '<tr style="cursor: pointer;" onClick="window.document.location=\'' . $links[$i] . '\';">';
       } else {
         echo '<tr>';
       }
@@ -20,6 +21,7 @@
       echo '</tr>';
       $i++;
     }
+    echo '</tbody>';
     echo '</table>';
   }
 
