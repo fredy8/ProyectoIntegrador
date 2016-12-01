@@ -77,7 +77,7 @@
       ?>
       <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
       <input name="userfile" type="file" id="userfile"><br>
-      <input name="upload" type="submit" class="btn btn-success" id="upload" value=" Upload ">
+      <input name="upload" type="submit" class="btn btn-success" id="upload" value=" Cargar ">
     </form>
   </div>
 </body>

@@ -50,7 +50,9 @@
           ['Region', $school["region"]],
           ['Alumnos', $school["alumnos"]],
           ['Comentarios', $school["comentarios"]],
+          ['', '<a href="/events.php?school=' . $id .'">Eventos</a>'],
         ];
+
         foreach ($fields as $field) {
           echo '<div class="row form-group">';
           echo '<label class="col-xs-3 col-xs-offset-1" style="text-align: right;">' . $field[0] .'</label>';
