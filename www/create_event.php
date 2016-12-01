@@ -122,13 +122,38 @@
           $nombre = $conn->real_escape_string($_POST["nombre"]);
           $objetivo = $conn->real_escape_string($_POST["objetivo"]);
           $datearray = date_parse($_POST["fecha"]);
-          $year = $datearray['year'];
+
+          $year = $datearray['year'] . "";
+          while (strlen($year) < 4)
+            $year = "0" . $year;
+
           $month = $datearray['month'];
+          if ($month < 10)
+            $month = "0" . $month;
+
           $day = $datearray['day'];
+          if ($day < 10)
+            $day = "0" . $day;
+
           $inicio_hour = $_POST['hora_inicio_hour'];
+          if ($inicio_hour < 10)
+            $inicio_hour = "0" . $inicio_hour;
+
           $inicio_minute = $_POST['hora_inicio_minute'];
+          if ($inicio_minute < 10)
+            $inicio_minute = "0" . $inicio_minute;
+
           $fin_hour = $_POST['hora_fin_hour'];
+          if ($fin_hour < 10)
+            $fin_hour = "0" . $fin_hour;
+
           $fin_minute = $_POST['hora_fin_minute'];
+          if ($fin_minute < 10)
+            $fin_minute = "0" . $fin_minute;
+
+          $datetime_inicio = $year . "-" . $month . "-" . $day . " " . $inicio_hour . ":" . $inicio_minute . ":00";
+          $datetime_fin = $year . "-" . $month . "-" . $day . " " . $fin_hour . ":" . $fin_minute . ":00";
+
           $lugar = $conn->real_escape_string($_POST["lugar"]);
           $tematica = $conn->real_escape_string($_POST["tematica"]);
           $descripcion = $conn->real_escape_string($_POST["descripcion"]);
@@ -155,7 +180,7 @@
               fin, lugar, tematica, descripcion, num_alumnos, num_padres, num_personal, num_voluntarios,
               institucion, num_alumnos_servicio, universidad, empresario, inversion_monetaria_empresa, 
               inversion_especie_empresa, inversion_monetaria_escuela, inversion_especie_escuela, otro_tipo_donacion,
-              correo_electronico) values ($escuela_id, '$empresa', '$gestion', '$nombre', '$objetivo', NOW(), NOW(),
+              correo_electronico) values ($escuela_id, '$empresa', '$gestion', '$nombre', '$objetivo', ('$datetime_inicio'), ('$datetime_fin'),
               '$lugar', '$tematica', '$descripcion', $num_alumnos, $num_padres, $num_personal, $num_voluntarios,
               '$institucion', $num_alumnos_servicio, '$universidad', $empresario, $inversion_monetaria,
               '$inversion_especie', $inversion_monetaria_escuela, '$inversion_especie_escuela', '$otro_tipo_donacion',
