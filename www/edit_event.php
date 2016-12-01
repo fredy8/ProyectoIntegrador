@@ -2,6 +2,8 @@
   include 'php_header.php';
 
   $editing = true;
+  $error = false;
+
   $id = $_GET['id'];
   if (!$id) {
     header("Location: /events.php");
