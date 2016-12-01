@@ -22,7 +22,7 @@
   }
 
   function textarea_input($name, $label, $error, $initial_value = "") {
-    field($label, $error, '<textarea rows="4" cols="50" value="' . $initial_value .'" name="' . $name . '"></textarea>');
+    field($label, $error, '<textarea rows="4" cols="50" name="' . $name . '">' . $initial_value . '</textarea>');
   }
 
   function number_input($name, $label, $error, $min = NULL, $max = NULL, $initial_value = 0) {
