@@ -60,7 +60,6 @@
           . " values('$iNombre', '$iDirector', '$iNivel', '$iTurno', '$iSostenimiento'," 
           . " '$iDireccion', '$iRegion', '$iFecha', $iAlumnos, '$iComentarios')";
       }
-      echo $query;
       if ($conn->query($query)) {
         header("Location: /schools.php");
         $editing_school = false;
