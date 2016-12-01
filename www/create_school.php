@@ -28,8 +28,6 @@
     $iAlumnos = $_POST["alumnos"];
     $iComentarios = $_POST["comentarios"];
 
-    $valid = true;
-
     if (empty($_POST["nombre"]))
       $error_nombre = "El nombre no puede estar vacío";
     if (empty($_POST["director"]))
@@ -57,6 +55,7 @@
         $query = "update escuelas set nombre='$iNombre', director='$iDirector', nivel='$iNivel', turno='iTurno',"
           . " sostenimiento='$iSostenimiento', direccion='$iDireccion', region='$iRegion', fecha='$iFecha', alumnos=$iALumnos,"
           . " comentarios='$iComentarios' where id=$id";
+        $editing_school = false;
       } else {
         $query = "insert into escuelas (nombre, director, nivel, turno, sostenimiento, direccion, region, fecha, alumnos, comentarios)"
           . " values('$iNombre', '$iDirector', '$iNivel', '$iTurno', '$iSostenimiento'," 
@@ -87,7 +86,7 @@
         textarea_input("direccion", "Dirección", $error_direccion, $iDireccion);
         textbox_input("region", "Región", $error_region, $iRegion);
         date_input("fecha", "Fecha de inicio", $error_fecha, $iFecha);
-        number_input("alumnos", "Número de alumnos", $error_alumnos, $iAlumnos);
+        number_input("alumnos", "Número de alumnos", $error_alumnos, 0, NULL, $iAlumnos);
         textarea_input("comentarios", "Comentarios", $error_comentarios, $iComentarios);
       ?>
 

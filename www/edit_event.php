@@ -1,6 +1,8 @@
 <?php
   include 'php_header.php';
 
+  error_reporting( error_reporting() & ~E_NOTICE );
+
   $editing = true;
 
   $id = $_GET['id'];
