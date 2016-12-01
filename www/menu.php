@@ -5,4 +5,5 @@
   }
 ?>
 <a href="/schools.php">Escuelas</a>
+<a href="/events.php">Eventos</a>
 <a href="/logout.php">Salir</a>

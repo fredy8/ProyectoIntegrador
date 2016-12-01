@@ -33,9 +33,9 @@
   }
 
   function select_input($name, $label, $values, $error) {
-    $input = '<select>';
+    $input = '<select name="' . $name .'">';
     foreach ($values as $value) {
-      $input = $input . '<option value= ' . $value . '>' . $value . '</option>';
+      $input = $input . '<option value="' . $value . '">' . $value . '</option>';
     }
     $input = $input . '</select>';
     field($label, $error, $input);

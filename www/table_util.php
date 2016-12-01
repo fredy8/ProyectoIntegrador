@@ -18,6 +18,7 @@
         echo '<td>' . $cell . '</td>';
       }
       echo '</tr>';
+      $i++;
     }
     echo '</table>';
   }

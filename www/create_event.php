@@ -1,0 +1,202 @@
+<?php
+  $require_auth = true;
+
+  include 'php_header.php';
+  include 'validation.php';
+
+  $error_escuela = NULL;
+  $error_empresa = NULL;
+  $error_gestion = NULL;
+  $error_objetivo = NULL;
+  $error_fecha = NULL;
+  $error_hora_inicio = NULL;
+  $error_hora_fin = NULL;
+  $error_lugar = NULL;
+  $error_tematica = NULL;
+  $error_descripcion = NULL;
+  $error_num_alumnos = NULL;
+  $error_num_padres = NULL;
+  $error_num_personal = NULL;
+  $error_num_voluntarios = NULL;
+  $error_institucion = NULL;
+  $error_num_alumnos_servicio = NULL;
+  $error_universidad = NULL;
+  $error_empresario = NULL;
+  $error_inversion_monetaria = NULL;
+  $error_inversion_especie = NULL;
+  $error_inversion_monetaria_escuela = NULL;
+  $error_inversion_especie_escuela = NULL;
+  $error_otra_donacion = NULL;
+  $error_correo_electronico = NULL;
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (empty($_POST["escuela"]))
+      $error_escuela = "El nombre de la escuela no puede estar vacio";
+    if (empty($_POST["empresa"]))
+      $error_empresa = "El nombre de la empresa no puede estar vacio";
+    if (empty($_POST["gestion"]))
+      $error_gestion = "Gestión inválida";
+    if (empty($_POST["nombre"]))
+      $error_nombre = "El nombre del evento no puede estar vacio";
+    if (empty($_POST["objetivo"]))
+      $error_objetivo = "Objetivo no puede estar vacio";
+    if (date_parse($_POST["fecha"]) === false)
+      $error_fecha = "Fecha inválida";
+    if ((intval($_POST["hora_inicio_hour"]) == 0 && $_POST["hora_inicio_hour"] != "0") ||
+        (intval($_POST["hora_inicio_minute"]) == 0 && $_POST["hora_inicio_minute"] != "0"))
+      $error_hora_inicio = "Hora de inicio invalida.";
+    if ((intval($_POST["hora_fin_hour"]) == 0 && $_POST["hora_fin_hour"] != "0") ||
+        (intval($_POST["hora_fin_minute"]) == 0 && $_POST["hora_fin_minute"] != "0"))
+      $error_hora_fin = "Hora de fin invalida.";
+    if (empty($_POST["lugar"]))
+      $error_lugar = "El lugar no puede estar vacio";
+    if (empty($_POST["tematica"]))
+      $error_tematica = "Tematica no puede estar vacio";
+    if (empty($_POST["descripcion"]))
+      $error_descripcion = "La descripción no puede estar vacia.";
+    if (intval($_POST["num_alumnos"]) == 0 && $_POST["num_alumnos"] != "0")
+      $error_num_alumnos = "El número de alumnos debe ser un número";
+    if (intval($_POST["num_padres"]) == 0 && $_POST["num_padres"] != "0")
+      $error_num_padres = "El número de padres de familia debe ser un número";
+    if (intval($_POST["num_personal"]) == 0 && $_POST["num_personal"] != "0")
+      $error_num_personal = "El número de personal debe ser un número";
+    if (intval($_POST["num_voluntarios"]) == 0 && $_POST["num_voluntarios"] != "0")
+      $error_num_voluntarios = "El número de voluntarios debe ser un número";
+    if (empty($_POST["institucion"]))
+      $error_institucion = "El nombre de la institución no puede estar vacio";
+    if (intval($_POST["num_alumnos_servicio"]) == 0 && $_POST["num_alumnos_servicio"] != "0")
+      $error_num_alumnos_servicio = "El número de alumnos de servicio social debe ser un número";
+    if (empty($_POST["universidad"]))
+      $error_universidad = "El nombre de la universidad no puede estar vacio";
+    if (intval($_POST["inversion_monetaria"]) == 0 && $_POST["inversion_monetaria"] != "0")
+      $error_inversion_monetaria = "La inversión monetaria debe de ser un número";
+    if (intval($_POST["inversion_monetaria_escuela"]) == 0 && $_POST["inversion_monetaria_escuela"] != "0")
+      $error_inversion_monetaria_escuela = "La inversión monetaria debe de ser un número";
+    if (empty($_POST["correo_electronico"]))
+      $error_correo_electronico = "El correo electrónico no puede estar vacio";
+
+    if (empty($error_escuela) && empty($error_empresa) && empty($error_gestion) &&
+        empty($error_objetivo) && empty($error_fecha) && empty($error_hora_inicio) &&
+        empty($error_hora_fin) && empty($error_lugar) && empty($error_tematica) &&
+        empty($error_descripcion) && empty($error_num_alumnos) && empty($error_num_padres) &&
+        empty($error_num_personal) && empty($error_num_voluntarios) && empty($error_institucion) &&
+        empty($error_num_alumnos_servicio) && empty($error_universidad) && empty($error_empresario) &&
+        empty($error_inversion_monetaria) && empty($error_inversion_especie) && empty($error_inversion_monetaria_escuela) &&
+        empty($error_inversion_especie_escuela) && empty($error_otra_donacion) && empty($error_correo_electronico)) {
+      $escuela = $conn->real_escape_string($_POST["escuela"]);
+      if ($result = $conn->query("select id from escuelas where nombre = '$escuela'")) {
+        if ($row = $result->fetch_assoc()) {
+          $escuela_id = $row["id"];
+          $empresa = $conn->real_escape_string($_POST["empresa"]);
+          $gestion = $conn->real_escape_string($_POST["gestion"]);
+          $nombre = $conn->real_escape_string($_POST["nombre"]);
+          $objetivo = $conn->real_escape_string($_POST["objetivo"]);
+          $datearray = date_parse($_POST["fecha"]);
+          $year = $datearray['year'];
+          $month = $datearray['month'];
+          $day = $datearray['day'];
+          $inicio_hour = $_POST['hora_inicio_hour'];
+          $inicio_minute = $_POST['hora_inicio_minute'];
+          $fin_hour = $_POST['hora_fin_hour'];
+          $fin_minute = $_POST['hora_fin_minute'];
+          $lugar = $conn->real_escape_string($_POST["lugar"]);
+          $tematica = $conn->real_escape_string($_POST["tematica"]);
+          $descripcion = $conn->real_escape_string($_POST["descripcion"]);
+          $num_alumnos = intval($_POST["num_alumnos"]);
+          $num_padres = intval($_POST["num_padres"]);
+          $num_personal = intval($_POST["num_personal"]);
+          $num_voluntarios = intval($_POST["num_voluntarios"]);
+          $institucion = $conn->real_escape_string($_POST["institucion"]);
+          $num_alumnos_servicio = intval($_POST["num_alumnos_servicio"]);
+          $universidad = $conn->real_escape_string($_POST["universidad"]);
+          $empresario = false;
+          if ($_POST["empresario"] == "Sí")
+            $empresario = 1;
+          else
+            $empresario = 0;
+          $inversion_monetaria = intval($_POST["inversion_monetaria"]);
+          $inversion_especie = $conn->real_escape_string($_POST["inversion_especie"]);
+          $inversion_monetaria_escuela = intval($_POST["inversion_monetaria_escuela"]);
+          $inversion_especie_escuela = $conn->real_escape_string($_POST["inversion_especie_escuela"]);
+          $otro_tipo_donacion = $conn->real_escape_string($_POST["otra_donacion"]);
+          $correo_electronico = $conn->real_escape_string($_POST["correo_electronico"]);
+
+          if ($conn->query("insert into eventos (escuela_id, empresa, gestion, nombre, objetivo, inicio,
+              fin, lugar, tematica, descripcion, num_alumnos, num_padres, num_personal, num_voluntarios,
+              institucion, num_alumnos_servicio, universidad, empresario, inversion_monetaria_empresa, 
+              inversion_especie_empresa, inversion_monetaria_escuela, inversion_especie_escuela, otro_tipo_donacion,
+              correo_electronico) values ($escuela_id, '$empresa', '$gestion', '$nombre', '$objetivo', NOW(), NOW(),
+              '$lugar', '$tematica', '$descripcion', $num_alumnos, $num_padres, $num_personal, $num_voluntarios,
+              '$institucion', $num_alumnos_servicio, '$universidad', $empresario, $inversion_monetaria,
+              '$inversion_especie', $inversion_monetaria_escuela, '$inversion_especie_escuela', '$otro_tipo_donacion',
+              '$correo_electronico')")) {
+            header("Location: /events.php");
+          } else {
+            die($conn->error);
+          }
+        } else {
+          $error_escuela = "Escuela no encontrada.";
+        }
+      } else {
+        die("Ocurrió un error.");
+      }
+    }
+  }
+
+  include 'header.php';
+  include 'inputs.php';
+ ?>
+
+<body>
+  <?php include 'menu.php'; ?>
+  <form action="/create_event.php" method="POST">
+    <?php
+      $escuelas = array();
+      if ($result = $conn->query("select nombre from escuelas")) {
+        while ($row = $result->fetch_assoc()) {
+          array_push($escuelas, $row["nombre"]);
+        }
+      } else {
+        die("Ocurrió un error.");
+      }
+      textbox_input("empresa", "Empresa a la que pertenece el asesor", $error_empresa);
+      select_input("escuela", "Escuela", $escuelas, $error_escuela);
+      select_input("gestion", "El evento o actividad fue gestionado por",
+        array("La escuela", "El asesor", "En conjunto", "Una organización civil", "Municipio", "SENL", "Otro"), $error_gestion);
+      textbox_input("nombre", "Nombre del evento o actividad", $error_nombre);
+      textbox_input("objetivo", "Objetivo", $error_objetivo);
+      date_input("fecha", "Fecha en que se realizó", $error_fecha);
+      time_input("hora_inicio", "Hora de inicio", $error_hora_inicio);
+      time_input("hora_fin", "Hora en que termino", $error_hora_fin);
+      textbox_input("lugar", "¿Dónde se realizó?", $error_lugar);
+      select_input("tematica", "¿Cuál fue la temática del evento o actividad?",
+        array("5'S", "Académico", "Arranque de obras", "Capacitaciones", "CEPS", "Concursos",
+            "Cultural", "Deportivo", "Ecológico", "Entrega de Infraestructura", "Feria de los Ceps",
+            "Gran Día de la Limpieza", "Mantenimiento de la Escuela", "Programas", "Salud", "Seguridad",
+            "Otro"), $error_tematica);
+      textbox_input("descripcion", "Descripción del Evento", $error_descripcion);
+      number_input("num_alumnos", "¿Cuántos alumnos asistieron?", $error_num_alumnos, 0, 10000);
+      number_input("num_padres", "¿Cuántos padres de familia asistieron?", $error_num_padres, 0, 10000);
+      number_input("num_personal", "¿Cuánto personal de la escuela asistió?", $error_num_personal, 0, 10000);
+      number_input("num_voluntarios", "¿Cuántos voluntarios asistieron?", $error_num_voluntarios, 0, 10000);
+      textbox_input("institucion", "Nombre de la institución que apoyó con voluntariado", $error_institucion);
+      number_input("num_alumnos_servicio", "Número de alumnos de servicio social que asistieron", $error_num_alumnos_servicio, 0, 10000);
+      select_input("universidad", "Universidad que participó",
+        array("UANL", "UDEM", "ITESM", "UR", "Tec Milenio", "Universidad Metropolitana",
+            "UMM", "NA", "Otro"), $error_universidad);
+      select_input("empresario", "¿Asistió el empresario al evento?",
+        array("Sí", "No"), $error_empresario);
+      number_input("inversion_monetaria", "Inversión monetaria de la empresa", $error_inversion_monetaria, 0, 1000000000);
+      textbox_input("inversion_especie", "Inversión en especie de la empresa", $error_inversion_especie);
+      number_input("inversion_monetaria_escuela", "Inversión monetaria de la escuela", $error_inversion_monetaria_escuela, 0, 1000000000);
+      textbox_input("inversion_especie_escuela", "Inversión en especie de la escuela", $error_inversion_especie_escuela);
+      textbox_input("otra_donacion", "Otro tipo de donación", $error_otra_donacion);
+      textbox_input("correo_electronico", "Agrega tu correo electrónico", $error_correo_electronico);
+    ?>
+    <input type="submit" value="Crear">
+  </form>
+</body>
+
+<?php
+  include 'footer.php';
+?>

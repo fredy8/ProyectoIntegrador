@@ -7,7 +7,7 @@
 <body>
   <?php include 'menu.php'; ?>
   <br>
-  You are logged in.
+  Bienvenido al sistema de AECNL.
 </body>
 
 <?php
