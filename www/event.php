@@ -40,6 +40,8 @@
       } else {
         echo '<a href="/edit_event.php?id=' . $id . '">';
         echo '<button type="button" class="btn btn-info">Editar</button>';
+        echo '<a href="/upload_file.php?id=' . $id . '&type=evento">';
+        echo '<button type="button" class="btn btn-info">Agregar archivo/imagen</button>';
         echo '</a>';
         $fields = [
           ['Nombre', $event['nombre']],

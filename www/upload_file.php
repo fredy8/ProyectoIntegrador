@@ -3,7 +3,32 @@
   include 'php_header.php';
   include 'header.php';
 
-  $upload_error = false;
+  $validIdTypes = array('escuela', 'evento');
+  $id = $_GET['id'];
+  $type = $_GET['type'];
+  $error = false;
+  if (!$id || !$type || !in_array($type, $validIdTypes)) {
+    $error = true;
+  } else {
+    if ($type === 'escuela') 
+      $query = "select nombre from escuelas where id='$id'";
+    else
+      $query = "select nombre from eventos where id='$id'";
+
+    if ($result = $conn->query($query)) {
+      if ($row = $result->fetch_assoc()) {
+        $name = $row['nombre'];
+      } else {
+        $error = true;
+      }
+    } else {
+      $error = true;
+    }
+  }
+
+  if ($error) {
+    header("Location: /home.php");
+  }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_FILES['userfile']['size'] > 0) {
@@ -20,17 +45,23 @@
       if(!get_magic_quotes_gpc()) {
           $fileName = addslashes($fileName);
       }
+      
+      $idType = $type . '_id';
+      $query = "INSERT INTO archivos (name, size, type, content, $idType) ".
+        "VALUES ('$fileName', '$fileSize', '$fileType', '$content', $id)";
 
-      $query = "INSERT INTO archivos (name, size, type, content ) ".
-        "VALUES ('$fileName', '$fileSize', '$fileType', '$content')";
+      echo $query;
 
       if ($conn->query($query)) {
-        header("Location: /upload_file.php");
+        if ($type === 'escuela')
+          header("Location: /school.php?id=$id");
+        else
+          header("Location: /event.php?id=$id");
       } else {
-        $upload_error = true;
+        die("Error al subir el archivo.");
       }
     } else {
-      $upload_error = true;
+      die("Error al subir el archivo.");
     }
   }
 
@@ -40,15 +71,15 @@
   <?php include 'menu.php'; ?>
   <div class="container">
     <form method="post" enctype="multipart/form-data">
-      <table width="350" border="0" cellpadding="1" cellspacing="1" class="box">
-        <tr> 
-          <td width="246">
-          <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-          <input name="userfile" type="file" id="userfile"> 
-          </td>
-          <td width="80"><input name="upload" type="submit" class="box" id="upload" value=" Upload "></td>
-        </tr>
-      </table>
+      <?php
+        echo 'Subir un archivo o imagen para ' . $type . ': ' . $name . '.';
+        echo '<br><br>';
+        echo '<input type="hidden" name="id" value=$id>';
+        echo '<input type="hidden" name="type" value=$type>';
+      ?>
+      <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+      <input name="userfile" type="file" id="userfile"><br>
+      <input name="upload" type="submit" class="btn btn-success" id="upload" value=" Upload ">
     </form>
   </div>
 </body>
