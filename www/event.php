@@ -65,8 +65,12 @@
           ['Otras donaciones', $event['otro_tipo_donacion']],
         ];
         foreach ($fields as $field) {
-          echo $field[0] . ': ' . $field[1];
-          echo '<br>';
+          echo '<div class="row form-group">';
+          echo '<label class="col-xs-3 col-xs-offset-1" style="text-align: right;">' . $field[0] .'</label>';
+          echo '<div class="col-xs-5">';
+          echo $field[1];
+          echo '</div>';
+          echo '</div>';
         }
         echo '<br>';
         echo 'Evento creador por ' . $event["correo_electronico"] . '<br>';
