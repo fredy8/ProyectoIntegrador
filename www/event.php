@@ -12,6 +12,9 @@
     header("Location: /events.php");
   }
 
+  $showFilesId = $id;
+  $showFilesType = 'evento';
+
   if ($result = $conn->query("select * from eventos where id='$id'")) {
     if (!($event = $result->fetch_assoc())) {
       $error = true;
@@ -40,9 +43,13 @@
       } else {
         echo '<a href="/edit_event.php?id=' . $id . '">';
         echo '<button type="button" class="btn btn-info">Editar</button>';
+        echo '</a>';
         echo '<a href="/upload_file.php?id=' . $id . '&type=evento">';
         echo '<button type="button" class="btn btn-info">Agregar archivo/imagen</button>';
         echo '</a>';
+
+        include 'carousel.php';
+
         $fields = [
           ['Nombre', $event['nombre']],
           ['Escuela', '<a href="/school.php?id=' . $school["id"] . '">' . $school['nombre'] . "</a>"],
@@ -78,6 +85,8 @@
         }
         echo '<br>';
         echo 'Evento creador por ' . $event["correo_electronico"] . '<br>';
+
+        include 'file_list.php';
       }
     ?>
   </div>

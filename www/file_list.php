@@ -27,7 +27,8 @@
       array_push($rows, 
         [$row['id'], $row['name'], formatBytes($row['size']), getDownloadButton($row['id'])]);
     }
-    drawTable($header, $rows);
+    if (count($rows) > 0)
+      drawTable($header, $rows);
   }
 
   function formatBytes($bytes, $precision = 2) { 
