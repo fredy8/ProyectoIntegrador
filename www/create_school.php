@@ -53,16 +53,17 @@
       && empty($error_direccion) && empty($error_region) && empty($error_fecha) && empty($error_alumnos)) {
       if ($editing_school) {
         $query = "update escuelas set nombre='$iNombre', director='$iDirector', nivel='$iNivel', turno='iTurno',"
-          . " sostenimiento='$iSostenimiento', direccion='$iDireccion', region='$iRegion', fecha='$iFecha', alumnos=$iALumnos,"
+          . " sostenimiento='$iSostenimiento', direccion='$iDireccion', region='$iRegion', fecha='$iFecha', alumnos=$iAlumnos,"
           . " comentarios='$iComentarios' where id=$id";
-        $editing_school = false;
       } else {
         $query = "insert into escuelas (nombre, director, nivel, turno, sostenimiento, direccion, region, fecha, alumnos, comentarios)"
           . " values('$iNombre', '$iDirector', '$iNivel', '$iTurno', '$iSostenimiento'," 
           . " '$iDireccion', '$iRegion', '$iFecha', $iAlumnos, '$iComentarios')";
       }
+      echo $query;
       if ($conn->query($query)) {
-        header("Location: /school_created.php");
+        header("Location: /schools.php");
+        $editing_school = false;
       } else {
         $create_error = true;
       }
@@ -73,36 +74,48 @@
 ?>
 
 <body>
-  <?php include 'menu.php'; ?>
-  <div class="container">
-    <br>
-    <form action="/create_school.php" method="POST">
-      <?php
-        textbox_input("nombre", "Nombre de la escuela", $error_nombre, $iNombre);
-        textbox_input("director", "Nombre del director", $error_director, $iDirector);
-        textbox_input("nivel", "Nivel", $error_nivel, $iNivel);
-        textbox_input("turno", "Turno", $error_turno, $iTurno);
-        select_input("sostenimiento", "Sostenimiento", array("Pública", "Privada"), $error_sostenimiento, $iSostenimiento);
-        textarea_input("direccion", "Dirección", $error_direccion, $iDireccion);
-        textbox_input("region", "Región", $error_region, $iRegion);
-        date_input("fecha", "Fecha de inicio", $error_fecha, $iFecha);
-        number_input("alumnos", "Número de alumnos", $error_alumnos, 0, NULL, $iAlumnos);
-        textarea_input("comentarios", "Comentarios", $error_comentarios, $iComentarios);
-      ?>
+  <?php 
+    include 'menu.php';
+    echo '<div class="container">';
+    
+      if ($editing_school) {
+        echo '<form action="/edit_school.php?id=' . $id .'" method="POST">';
+      } else {
+        echo '<form action="/create_school.php" method="POST">';
+      }
 
-      <?php
-        if ($create_error) {
-          echo 'Ya existe una escuela con ese nombre.';
-          echo '<br>';
-        }
-      ?>
+      textbox_input("nombre", "Nombre de la escuela", $error_nombre, $iNombre);
+      textbox_input("director", "Nombre del director", $error_director, $iDirector);
+      textbox_input("nivel", "Nivel", $error_nivel, $iNivel);
+      textbox_input("turno", "Turno", $error_turno, $iTurno);
+      select_input("sostenimiento", "Sostenimiento", array("Pública", "Privada"), $error_sostenimiento, $iSostenimiento);
+      textarea_input("direccion", "Dirección", $error_direccion, $iDireccion);
+      textbox_input("region", "Región", $error_region, $iRegion);
+      date_input("fecha", "Fecha de inicio", $error_fecha, $iFecha);
+      number_input("alumnos", "Número de alumnos", $error_alumnos, 0, NULL, $iAlumnos);
+      textarea_input("comentarios", "Comentarios", $error_comentarios, $iComentarios);
 
-      <div style="margin-bottom: 15px;">
-      <a href="/schools.php">
-        <input style="margin-right: 10px" type="button" class="btn btn-danger col-xs-offset-7" value="Cancelar">
-      </a>
-      <input type="submit" class="btn btn-success" value="Agregar">
-      </div>
+      if ($create_error) {
+        echo 'Ya existe una escuela con ese nombre.';
+        echo '<br>';
+      }
+
+      if ($editing_school) {
+        echo '<div style="margin-bottom: 15px;">';
+        echo '<a href="/event.php?id=' . $id .'">';
+        echo '<input style="margin-right: 10px" type="button" class="btn btn-danger col-xs-offset-7" value="Cancelar">';
+        echo '</a>';
+        echo '<input type="submit" class="btn btn-success" value="Guardar">';
+      } else {
+        echo '<div style="margin-bottom: 15px;">';
+        echo '<a href="/events.php">';
+        echo '<input style="margin-right: 10px" type="button" class="btn btn-danger col-xs-offset-7" value="Cancelar">';
+        echo '</a>';
+        echo '<input type="submit" class="btn btn-success" value="Crear">';
+      }
+
+      echo '</div>';
+    ?>
     </form>
   </div>
 </body>
