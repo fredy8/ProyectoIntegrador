@@ -4,9 +4,12 @@
   include 'php_header.php';
   include 'validation.php';
 
+  $editing = false;
+
   $error_escuela = NULL;
   $error_empresa = NULL;
   $error_gestion = NULL;
+  $error_nombre = NULL;
   $error_objetivo = NULL;
   $error_fecha = NULL;
   $error_hora_inicio = NULL;
@@ -28,6 +31,36 @@
   $error_inversion_especie_escuela = NULL;
   $error_otra_donacion = NULL;
   $error_correo_electronico = NULL;
+
+  $iEmpresa = NULL;
+  $iEscuela = NULL;
+  $iGestion = NULL;
+  $iNombre = NULL;
+  $iObjetivo = NULL;
+  $iFecha = NULL;
+  $iHora_inicio = NULL;
+  $iHora_inicio_hour = NULL;
+  $iHora_inicio_minute = NULL;
+  $iHora_fin = NULL;
+  $iHora_fin_hour = NULL;
+  $iHora_fin_minute = NULL;
+  $iLugar = NULL;
+  $iTematica = NULL;
+  $iDescripcion = NULL;
+  $iNum_alumnos = NULL;
+  $iNum_padres = NULL;
+  $iNum_personal = NULL;
+  $iNum_voluntarios = NULL;
+  $iInstitucion = NULL;
+  $iNum_alumnos_servicio = NULL;
+  $iUniversidad = NULL;
+  $iEmpresario = NULL;
+  $iInversion_monetaria = NULL;
+  $iInversion_especie = NULL;
+  $iInversion_monetaria_escuela = NULL;
+  $iInversion_especie_escuela = NULL;
+  $iOtra_donacion = NULL;
+  $iCorreo_electronico = NULL;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $iEmpresa = $_POST["empresa"];
