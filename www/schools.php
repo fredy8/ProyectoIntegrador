@@ -4,6 +4,8 @@
   include 'header.php';
   include 'table_util.php';
 
+  error_reporting( error_reporting() & ~E_NOTICE );
+
   function loadTable() {
     global $conn;
 

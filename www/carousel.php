@@ -31,7 +31,8 @@
     global $conn;
     if ($result = $conn->query("select type, content from archivos where id=$id")) {
       if ($row = $result->fetch_assoc()) {
-        echo '<img style="height:200px; margin-left: 300px;" src="data:image/jpeg;base64,'.base64_encode( $row['content'] ).'"/>';
+        echo '<img style="display:block; height:200px; margin: auto;" src="data:image/jpeg;base64,' 
+          .base64_encode( $row['content'] ) . '"/>';
       } else {
         echo 'error';
       }
@@ -44,8 +45,8 @@
 <?php
   if ($numImages > 0) {
 ?>
-<div style='max-height:550px; padding-bottom:30px'>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div style='max-height:550px; padding:20px'>
+<div id="myCarousel" class="carousel slide" style="height:300px; padding-top:50px;" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>

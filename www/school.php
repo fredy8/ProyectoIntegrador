@@ -3,6 +3,8 @@
   include 'php_header.php';
   include 'header.php';
 
+  error_reporting( error_reporting() & ~E_NOTICE );
+
   $error = false;
   $nombre = NULL;
 
@@ -35,7 +37,7 @@
         echo '<button type="button" class="btn btn-info">Editar</button>';
         echo '</a>';
         echo '<a href="/upload_file.php?id=' . $id . '&type=escuela">';
-        echo '<button type="button" class="btn btn-info">Agregar archivo/imagen</button>';
+        echo '<button type="button" style="margin-left:10px;" class="btn btn-info">Agregar archivo/imagen</button>';
         echo '</a>';
 
         include 'carousel.php';

@@ -1,4 +1,6 @@
 <?php
+  error_reporting( error_reporting() & ~E_NOTICE );
+
   $user_id = NULL;
   if (isset($_COOKIE['session_token'])) {
     // TODO decrypt token into id
