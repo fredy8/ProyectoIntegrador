@@ -218,62 +218,64 @@
 <body>
   <?php
     include 'menu.php';
+    <div class="container">
 
-    if ($editing) {
-      echo '<form action="/edit_event.php?id=' . $id .'" method="POST">';
-    } else {
-      echo '<form action="/create_event.php" method="POST">';
-    }
-
-    $escuelas = array();
-    if ($result = $conn->query("select nombre from escuelas")) {
-      while ($row = $result->fetch_assoc()) {
-        array_push($escuelas, $row["nombre"]);
+      if ($editing) {
+        echo '<form action="/edit_event.php?id=' . $id .'" method="POST">';
+      } else {
+        echo '<form action="/create_event.php" method="POST">';
       }
-    } else {
-      die("Ocurrió un error.");
-    }
-    textbox_input("empresa", "Empresa a la que pertenece el asesor", $error_empresa, $iEmpresa);
-    select_input("escuela", "Escuela", $escuelas, $error_escuela, $iEscuela);
-    select_input("gestion", "El evento o actividad fue gestionado por",
-      array("La escuela", "El asesor", "En conjunto", "Una organización civil", "Municipio", "SENL", "Otro"), $error_gestion, $iGestion);
-    textbox_input("nombre", "Nombre del evento o actividad", $error_nombre, $iNombre);
-    textbox_input("objetivo", "Objetivo", $error_objetivo, $iObjetivo);
-    date_input("fecha", "Fecha en que se realizó", $error_fecha, $iFecha);
-    time_input("hora_inicio", "Hora de inicio", $error_hora_inicio, $iHora_inicio_hour, $iHora_inicio_minute, $iHora_inicio);
-    time_input("hora_fin", "Hora en que termino", $error_hora_fin, $iHora_fin_hour, $iHora_fin_minute, $iHora_fin);
-    textbox_input("lugar", "¿Dónde se realizó?", $error_lugar, $iLugar);
-    select_input("tematica", "¿Cuál fue la temática del evento o actividad?",
-      array("5'S", "Académico", "Arranque de obras", "Capacitaciones", "CEPS", "Concursos",
-          "Cultural", "Deportivo", "Ecológico", "Entrega de Infraestructura", "Feria de los Ceps",
-          "Gran Día de la Limpieza", "Mantenimiento de la Escuela", "Programas", "Salud", "Seguridad",
-          "Otro"), $error_tematica, $iTematica);
-    textbox_input("descripcion", "Descripción del Evento", $error_descripcion, $iDescripcion);
-    number_input("num_alumnos", "¿Cuántos alumnos asistieron?", $error_num_alumnos, 0, 10000, $iNum_alumnos);
-    number_input("num_padres", "¿Cuántos padres de familia asistieron?", $error_num_padres, 0, 10000, $iNum_padres);
-    number_input("num_personal", "¿Cuánto personal de la escuela asistió?", $error_num_personal, 0, 10000, $iNum_personal);
-    number_input("num_voluntarios", "¿Cuántos voluntarios asistieron?", $error_num_voluntarios, 0, 10000, $iNum_voluntarios);
-    textbox_input("institucion", "Nombre de la institución que apoyó con voluntariado", $error_institucion, $iInstitucion);
-    number_input("num_alumnos_servicio", "Número de alumnos de servicio social que asistieron", $error_num_alumnos_servicio, 0, 10000, $iNum_alumnos_servicio);
-    select_input("universidad", "Universidad que participó",
-      array("UANL", "UDEM", "ITESM", "UR", "Tec Milenio", "Universidad Metropolitana",
-          "UMM", "NA", "Otro"), $error_universidad, $iUniversidad);
-    select_input("empresario", "¿Asistió el empresario al evento?",
-      array("Sí", "No"), $error_empresario, $iEmpresario);
-    number_input("inversion_monetaria", "Inversión monetaria de la empresa", $error_inversion_monetaria, 0, 1000000000, $iInversion_monetaria);
-    textbox_input("inversion_especie", "Inversión en especie de la empresa", $error_inversion_especie, $iInversion_especie);
-    number_input("inversion_monetaria_escuela", "Inversión monetaria de la escuela", $error_inversion_monetaria_escuela, 0, 1000000000, $iInversion_monetaria_escuela);
-    textbox_input("inversion_especie_escuela", "Inversión en especie de la escuela", $error_inversion_especie_escuela, $iInversion_especie_escuela);
-    textbox_input("otra_donacion", "Otro tipo de donación", $error_otra_donacion, $iOtra_donacion);
 
-    if ($editing) {
-      echo '<input type="submit" value="Guardar">';
-    } else {
-      textbox_input("correo_electronico", "Agrega tu correo electrónico", $error_correo_electronico, $iCorreo_electronico);
-      echo '<input type="submit" value="Crear">';
-    }
-  ?>
-  </form>
+      $escuelas = array();
+      if ($result = $conn->query("select nombre from escuelas")) {
+        while ($row = $result->fetch_assoc()) {
+          array_push($escuelas, $row["nombre"]);
+        }
+      } else {
+        die("Ocurrió un error.");
+      }
+      textbox_input("empresa", "Empresa a la que pertenece el asesor", $error_empresa, $iEmpresa);
+      select_input("escuela", "Escuela", $escuelas, $error_escuela, $iEscuela);
+      select_input("gestion", "El evento o actividad fue gestionado por",
+        array("La escuela", "El asesor", "En conjunto", "Una organización civil", "Municipio", "SENL", "Otro"), $error_gestion, $iGestion);
+      textbox_input("nombre", "Nombre del evento o actividad", $error_nombre, $iNombre);
+      textbox_input("objetivo", "Objetivo", $error_objetivo, $iObjetivo);
+      date_input("fecha", "Fecha en que se realizó", $error_fecha, $iFecha);
+      time_input("hora_inicio", "Hora de inicio", $error_hora_inicio, $iHora_inicio_hour, $iHora_inicio_minute, $iHora_inicio);
+      time_input("hora_fin", "Hora en que termino", $error_hora_fin, $iHora_fin_hour, $iHora_fin_minute, $iHora_fin);
+      textbox_input("lugar", "¿Dónde se realizó?", $error_lugar, $iLugar);
+      select_input("tematica", "¿Cuál fue la temática del evento o actividad?",
+        array("5'S", "Académico", "Arranque de obras", "Capacitaciones", "CEPS", "Concursos",
+            "Cultural", "Deportivo", "Ecológico", "Entrega de Infraestructura", "Feria de los Ceps",
+            "Gran Día de la Limpieza", "Mantenimiento de la Escuela", "Programas", "Salud", "Seguridad",
+            "Otro"), $error_tematica, $iTematica);
+      textbox_input("descripcion", "Descripción del Evento", $error_descripcion, $iDescripcion);
+      number_input("num_alumnos", "¿Cuántos alumnos asistieron?", $error_num_alumnos, 0, 10000, $iNum_alumnos);
+      number_input("num_padres", "¿Cuántos padres de familia asistieron?", $error_num_padres, 0, 10000, $iNum_padres);
+      number_input("num_personal", "¿Cuánto personal de la escuela asistió?", $error_num_personal, 0, 10000, $iNum_personal);
+      number_input("num_voluntarios", "¿Cuántos voluntarios asistieron?", $error_num_voluntarios, 0, 10000, $iNum_voluntarios);
+      textbox_input("institucion", "Nombre de la institución que apoyó con voluntariado", $error_institucion, $iInstitucion);
+      number_input("num_alumnos_servicio", "Número de alumnos de servicio social que asistieron", $error_num_alumnos_servicio, 0, 10000, $iNum_alumnos_servicio);
+      select_input("universidad", "Universidad que participó",
+        array("UANL", "UDEM", "ITESM", "UR", "Tec Milenio", "Universidad Metropolitana",
+            "UMM", "NA", "Otro"), $error_universidad, $iUniversidad);
+      select_input("empresario", "¿Asistió el empresario al evento?",
+        array("Sí", "No"), $error_empresario, $iEmpresario);
+      number_input("inversion_monetaria", "Inversión monetaria de la empresa", $error_inversion_monetaria, 0, 1000000000, $iInversion_monetaria);
+      textbox_input("inversion_especie", "Inversión en especie de la empresa", $error_inversion_especie, $iInversion_especie);
+      number_input("inversion_monetaria_escuela", "Inversión monetaria de la escuela", $error_inversion_monetaria_escuela, 0, 1000000000, $iInversion_monetaria_escuela);
+      textbox_input("inversion_especie_escuela", "Inversión en especie de la escuela", $error_inversion_especie_escuela, $iInversion_especie_escuela);
+      textbox_input("otra_donacion", "Otro tipo de donación", $error_otra_donacion, $iOtra_donacion);
+
+      if ($editing) {
+        echo '<input type="submit" value="Guardar">';
+      } else {
+        textbox_input("correo_electronico", "Agrega tu correo electrónico", $error_correo_electronico, $iCorreo_electronico);
+        echo '<input type="submit" value="Crear">';
+      }
+    ?>
+    </form>
+  </div>
 </body>
 
 <?php

@@ -37,24 +37,29 @@
 ?>
 
 <body>
-  <form action="/login.php" method="POST">
-    Email:<br>
-    <input type="text" name="email">
-    <br>
-    Password:<br>
-    <input type="password" name="password">
-    <br>
-    <?php
-      if ($login_error) {
-        echo 'Usuario o contraseña incorrecta.';
-        echo '<br>';
-      } else if ($not_approved) {
-        echo 'La cuenta aún no ha sido aprovada por el administrador.';
-        echo '<br>';
-      }
-    ?>
-    <input type="submit" value="Log in">
-  </form>
+  <div class="container-fluid">
+    <img width="370px" class="center-block" src="logo.png" style="padding: 30px;">
+    <form style="max-width: 500px; padding: 15px; margin: 0px auto;" action="/login.php" method="POST">
+      <div class="form-group">
+        <label class="control-label" for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password">
+      </div>
+      <?php
+        if ($login_error) {
+          echo 'Usuario o contraseña incorrecta.';
+          echo '<br>';
+        } else if ($not_approved) {
+          echo 'La cuenta aún no ha sido aprovada por el administrador.';
+          echo '<br>';
+        }
+      ?>
+      <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar">
+    </form>
+  </div>
 </body>
 
 <?php

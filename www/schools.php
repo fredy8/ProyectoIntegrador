@@ -24,11 +24,13 @@
 
 <body>
   <?php include 'menu.php'; ?>
-  <br>
-  <a href="/create_school.php">Crear Escuela</a>
-  <?php
-    loadTable();
-  ?>
+  <div class="container">
+    <br>
+    <a href="/create_school.php">Crear Escuela</a>
+    <?php
+      loadTable();
+    ?>
+  </div>
 </body>
 
 <?php

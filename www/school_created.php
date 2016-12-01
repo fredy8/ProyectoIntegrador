@@ -6,9 +6,11 @@
 
 <body>
   <?php include 'menu.php'; ?>
-  <br>
-  Se ha creado la escuela exitosamente. 
-  <a href="/schools.php">Regresar</a>
+  <div class="container">
+    <br>
+    Se ha creado la escuela exitosamente. 
+    <a href="/schools.php">Regresar</a>
+  </div>
 </body>
 
 <?php

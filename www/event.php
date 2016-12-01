@@ -32,45 +32,47 @@
 
 <body>
   <?php include 'menu.php'; ?>
-  <br>
-  <?php
-    if ($error) {
-      echo 'No se encontró el evento.';
-    } else {
-      echo '<a href="/edit_event.php?id=' . $id . '">Editar Evento</a><br>';
-      $fields = [
-        ['Nombre', $event['nombre']],
-        ['Escuela', '<a href="/school.php?id=' . $school["id"] . '">' . $school['nombre'] . "</a>"],
-        ['Empresa', $event['empresa']],
-        ['Gestión', $event['gestion']],
-        ['Objetivo', $event['objetivo']],
-        ['Inicio', $event['inicio']],
-        ['Fin', $event['fin']],
-        ['Lugar', $event['lugar']],
-        ['Temática', $event['tematica']],
-        ['Descripción', $event['descripcion']],
-        ['Número de Alumnos', $event['num_alumnos']],
-        ['Número de Padres de Familia', $event['num_padres']],
-        ['Número de Personal', $event['num_personal']],
-        ['Número de Voluntarios', $event['num_voluntarios']],
-        ['Institución de Apoyo', $event['institucion']],
-        ['Número de Alumnos de Servicio Social', $event['num_alumnos_servicio']],
-        ['Universidad Participante', $event['universidad']],
-        ['Asistencia Empresario', $event['empresario'] === "1" ? "Sí" : "No"],
-        ['Inversión Monetaria Empresa', $event['inversion_monetaria_empresa']],
-        ['Inversión Especie Empresa', $event['inversion_especie_empresa']],
-        ['Inversión Monetaria Escuela', $event['inversion_monetaria_escuela']],
-        ['Inversión Especie Escuela', $event['inversion_especie_escuela']],
-        ['Otras donaciones', $event['otro_tipo_donacion']],
-      ];
-      foreach ($fields as $field) {
-        echo $field[0] . ': ' . $field[1];
+  <div class="container">
+    <br>
+    <?php
+      if ($error) {
+        echo 'No se encontró el evento.';
+      } else {
+        echo '<a href="/edit_event.php?id=' . $id . '">Editar Evento</a><br>';
+        $fields = [
+          ['Nombre', $event['nombre']],
+          ['Escuela', '<a href="/school.php?id=' . $school["id"] . '">' . $school['nombre'] . "</a>"],
+          ['Empresa', $event['empresa']],
+          ['Gestión', $event['gestion']],
+          ['Objetivo', $event['objetivo']],
+          ['Inicio', $event['inicio']],
+          ['Fin', $event['fin']],
+          ['Lugar', $event['lugar']],
+          ['Temática', $event['tematica']],
+          ['Descripción', $event['descripcion']],
+          ['Número de Alumnos', $event['num_alumnos']],
+          ['Número de Padres de Familia', $event['num_padres']],
+          ['Número de Personal', $event['num_personal']],
+          ['Número de Voluntarios', $event['num_voluntarios']],
+          ['Institución de Apoyo', $event['institucion']],
+          ['Número de Alumnos de Servicio Social', $event['num_alumnos_servicio']],
+          ['Universidad Participante', $event['universidad']],
+          ['Asistencia Empresario', $event['empresario'] === "1" ? "Sí" : "No"],
+          ['Inversión Monetaria Empresa', $event['inversion_monetaria_empresa']],
+          ['Inversión Especie Empresa', $event['inversion_especie_empresa']],
+          ['Inversión Monetaria Escuela', $event['inversion_monetaria_escuela']],
+          ['Inversión Especie Escuela', $event['inversion_especie_escuela']],
+          ['Otras donaciones', $event['otro_tipo_donacion']],
+        ];
+        foreach ($fields as $field) {
+          echo $field[0] . ': ' . $field[1];
+          echo '<br>';
+        }
         echo '<br>';
+        echo 'Evento creador por ' . $event["correo_electronico"] . '<br>';
       }
-      echo '<br>';
-      echo 'Evento creador por ' . $event["correo_electronico"] . '<br>';
-    }
-  ?>
+    ?>
+  </div>
 </body>
 
 <?php

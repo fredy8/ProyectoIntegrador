@@ -6,8 +6,10 @@
 
 <body>
   <?php include 'menu.php'; ?>
-  <br>
-  Bienvenido al sistema de AECNL.
+  <div class="container">
+    <br>
+    Bienvenido al sistema de AECNL.
+  </div>
 </body>
 
 <?php

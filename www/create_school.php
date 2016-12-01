@@ -101,30 +101,32 @@
 
 <body>
   <?php include 'menu.php'; ?>
-  <br>
-  <form action="/create_school.php" method="POST">
-    <?php
-      textbox_input("nombre", "Nombre de la escuela", $error_nombre);
-      textbox_input("director", "Nombre del director", $error_director);
-      textbox_input("nivel", "Nivel", $error_nivel);
-      textbox_input("turno", "Turno", $error_turno);
-      textbox_input("sostenimiento", "Sostenimiento", $error_sostenimiento);
-      textarea_input("direccion", "Dirección", $error_direccion);
-      textbox_input("region", "Región", $error_region);
-      date_input("fecha", "Fecha de inicio", $error_fecha);
-      number_input("alumnos", "Número de alumnos", $error_alumnos);
-      textarea_input("comentarios", "Comentarios", $error_comentarios);
-    ?>
+  <div class="container">
+    <br>
+    <form action="/create_school.php" method="POST">
+      <?php
+        textbox_input("nombre", "Nombre de la escuela", $error_nombre);
+        textbox_input("director", "Nombre del director", $error_director);
+        textbox_input("nivel", "Nivel", $error_nivel);
+        textbox_input("turno", "Turno", $error_turno);
+        textbox_input("sostenimiento", "Sostenimiento", $error_sostenimiento);
+        textarea_input("direccion", "Dirección", $error_direccion);
+        textbox_input("region", "Región", $error_region);
+        date_input("fecha", "Fecha de inicio", $error_fecha);
+        number_input("alumnos", "Número de alumnos", $error_alumnos);
+        textarea_input("comentarios", "Comentarios", $error_comentarios);
+      ?>
 
-    <?php
-      if ($create_error) {
-        echo 'Ya existe una escuela con ese nombre.';
-        echo '<br>';
-      }
-    ?>
-    <a href="schools.php">Cancelar</a>
-    <input type="submit" value="Crear">
-  </form>
+      <?php
+        if ($create_error) {
+          echo 'Ya existe una escuela con ese nombre.';
+          echo '<br>';
+        }
+      ?>
+      <a href="schools.php">Cancelar</a>
+      <input type="submit" value="Crear">
+    </form>
+  </div>
 </body>
 
 <?php

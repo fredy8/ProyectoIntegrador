@@ -23,14 +23,16 @@
 
 <body>
   <?php include 'menu.php'; ?>
-  <br>
-  <?php
-    if ($error) {
-      echo 'No se encontró la escuela.';
-    } else {
-      echo $nombre;
-    }
-  ?>
+  <div class="container">
+    <br>
+    <?php
+      if ($error) {
+        echo 'No se encontró la escuela.';
+      } else {
+        echo $nombre;
+      }
+    ?>
+  </div>
 </body>
 
 <?php
