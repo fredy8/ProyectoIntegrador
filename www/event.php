@@ -11,6 +11,7 @@
   if (!$id) {
     header("Location: /events.php");
   }
+
   if ($result = $conn->query("select * from eventos where id='$id'")) {
     if (!($event = $result->fetch_assoc())) {
       $error = true;
@@ -36,9 +37,10 @@
     if ($error) {
       echo 'No se encontró el evento.';
     } else {
+      echo '<a href="/edit_event.php?id=' . $id . '">Editar Evento</a><br>';
       $fields = [
         ['Nombre', $event['nombre']],
-        ['Escuela', '<a href="/school.php?id=' . $school["id"] . '">' . $event['nombre'] . "</a>"],
+        ['Escuela', '<a href="/school.php?id=' . $school["id"] . '">' . $school['nombre'] . "</a>"],
         ['Empresa', $event['empresa']],
         ['Gestión', $event['gestion']],
         ['Objetivo', $event['objetivo']],
