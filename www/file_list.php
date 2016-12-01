@@ -21,11 +21,11 @@
 
   function loadTable() {
     global $fileRows;
-    $header = ['ID', 'Nombre', 'Tamaño', 'Descargar'];
+    $header = ['ID', 'Nombre', 'Tamaño', 'Descargar', 'Eliminar'];
     $rows = [];
     foreach($fileRows as $row) {
       array_push($rows, 
-        [$row['id'], $row['name'], formatBytes($row['size']), getDownloadButton($row['id'])]);
+        [$row['id'], $row['name'], formatBytes($row['size']), getDownloadButton($row['id']), getDeleteButton($row['id'])]);
     }
     if (count($rows) > 0)
       drawTable($header, $rows);
@@ -44,7 +44,12 @@
 
   function getDownloadButton($id) {
     return '<a href="/download.php?id=' . $id . '">'
-      . '<button type="button" class="btn btn-info">Descargar</button>';
+      . '<button type="button" class="btn btn-info">Descargar</button></a>';
+  }
+
+  function getDeleteButton($id) {
+    return '<a href="/delete_file.php?id=' . $id . '">'
+      . '<button type="button" class="btn btn-danger">Eliminar</button></a>';
   }
 
 ?>

@@ -52,7 +52,7 @@
     if (empty($error_nombre) && empty($error_director) && empty($error_nivel) && empty($error_turno) && empty($error_sostenimiento) 
       && empty($error_direccion) && empty($error_region) && empty($error_fecha) && empty($error_alumnos)) {
       if ($editing_school) {
-        $query = "update escuelas set nombre='$iNombre', director='$iDirector', nivel='$iNivel', turno='iTurno',"
+        $query = "update escuelas set nombre='$iNombre', director='$iDirector', nivel='$iNivel', turno='$iTurno',"
           . " sostenimiento='$iSostenimiento', direccion='$iDireccion', region='$iRegion', fecha='$iFecha', alumnos=$iAlumnos,"
           . " comentarios='$iComentarios' where id=$id";
       } else {

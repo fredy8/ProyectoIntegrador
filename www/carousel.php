@@ -31,7 +31,7 @@
     global $conn;
     if ($result = $conn->query("select type, content from archivos where id=$id")) {
       if ($row = $result->fetch_assoc()) {
-        echo '<img src="data:image/jpeg;base64,'.base64_encode( $row['content'] ).'"/>';
+        echo '<img style="height:200px; margin-left: 300px;" src="data:image/jpeg;base64,'.base64_encode( $row['content'] ).'"/>';
       } else {
         echo 'error';
       }
@@ -44,6 +44,7 @@
 <?php
   if ($numImages > 0) {
 ?>
+<div style='max-height:550px; padding-bottom:30px'>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -60,7 +61,7 @@
     <?php
       $first = true;
       for($i = 0; $i < $numImages; $i++) {
-        echo '<div class="item' . ($i === 0 ? ' active' : '') . '">';
+        echo '<div style="max-height:200px;" class="item' . ($i === 0 ? ' active' : '') . '">';
         displayImage($imageIds[$i]);
         echo '</div>';
       }
@@ -76,6 +77,7 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+</div>
 </div>
 <?php
 }
