@@ -47,7 +47,7 @@
     if (intval($_POST["alumnos"]) == 0 && $_POST["alumnos"] != "0")
       $error_alumnos = "El número de alumnos debe ser un número";
     if (empty($_POST["comentarios"]))
-      $iComentarios = "";
+      $iComentarios = "Debe introducir comentarios";
 
     if (empty($error_nombre) && empty($error_director) && empty($error_nivel) && empty($error_turno) && empty($error_sostenimiento) 
       && empty($error_direccion) && empty($error_region) && empty($error_fecha) && empty($error_alumnos)) {
