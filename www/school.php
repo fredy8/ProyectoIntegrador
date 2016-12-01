@@ -20,7 +20,10 @@
 ?>
 
 <body>
-  <?php include 'menu.php'; ?>
+  <?php 
+    include 'menu.php'; 
+    include 'carousel.php';
+    ?>
   <div class="container">
     <br>
     <?php

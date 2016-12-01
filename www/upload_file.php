@@ -50,8 +50,6 @@
       $query = "INSERT INTO archivos (name, size, type, content, $idType) ".
         "VALUES ('$fileName', '$fileSize', '$fileType', '$content', $id)";
 
-      echo $query;
-
       if ($conn->query($query)) {
         if ($type === 'escuela')
           header("Location: /school.php?id=$id");
