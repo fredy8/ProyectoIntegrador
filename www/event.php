@@ -38,7 +38,7 @@
       if ($error) {
         echo 'No se encontró el evento.';
       } else {
-        echo '<a href="/edit_event.php?id=' . $id . '">Editar Evento</a><br>';
+        echo '<button type="button" class="btn btn-info" value="Editar">';
         $fields = [
           ['Nombre', $event['nombre']],
           ['Escuela', '<a href="/school.php?id=' . $school["id"] . '">' . $school['nombre'] . "</a>"],
