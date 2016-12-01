@@ -3,40 +3,19 @@
   include 'php_header.php';
   include 'inputs.php';
 
-  $nombre = null;
-  $director = null;
-  $nivel = null;
-  $turno = null;
-  $sostenimiento = null;
-  $direccion = null;
-  $region = null;
-  $fecha = null;
-  $alumnos = null;
-  $comentarios = null;
-  $error_nombre = null;
-  $error_director = null;
-  $error_nivel = null;
-  $error_turno = null;
-  $error_sostenimiento = null;
-  $error_direccion = null;
-  $error_region = null;
-  $error_fecha = null;
-  $error_alumnos = null;
-  $error_comentarios = null;
-
-  $create_error = false;
+  error_reporting( error_reporting() & ~E_NOTICE );
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST["nombre"];
-    $director = $_POST["director"];
-    $nivel = $_POST["nivel"];
-    $turno = $_POST["turno"];
-    $sostenimiento = $_POST["sostenimiento"];
-    $direccion = $_POST["direccion"];
-    $region = $_POST["region"];
-    $fecha = $_POST["fecha"];
-    $alumnos = $_POST["alumnos"];
-    $comentarios = $_POST["comentarios"];
+    $iNombre = $_POST["nombre"];
+    $iDirector = $_POST["director"];
+    $iNivel = $_POST["nivel"];
+    $iTurno = $_POST["turno"];
+    $iSostenimiento = $_POST["sostenimiento"];
+    $iDireccion = $_POST["direccion"];
+    $iRegion = $_POST["region"];
+    $iFecha = $_POST["fecha"];
+    $iAlumnos = $_POST["alumnos"];
+    $iComentarios = $_POST["comentarios"];
 
     $valid = true;
 
@@ -105,16 +84,16 @@
     <br>
     <form action="/create_school.php" method="POST">
       <?php
-        textbox_input("nombre", "Nombre de la escuela", $error_nombre);
-        textbox_input("director", "Nombre del director", $error_director);
-        textbox_input("nivel", "Nivel", $error_nivel);
-        textbox_input("turno", "Turno", $error_turno);
-        textbox_input("sostenimiento", "Sostenimiento", $error_sostenimiento);
-        textarea_input("direccion", "Dirección", $error_direccion);
-        textbox_input("region", "Región", $error_region);
-        date_input("fecha", "Fecha de inicio", $error_fecha);
-        number_input("alumnos", "Número de alumnos", $error_alumnos);
-        textarea_input("comentarios", "Comentarios", $error_comentarios);
+        textbox_input("nombre", "Nombre de la escuela", $error_nombre, $iNombre);
+        textbox_input("director", "Nombre del director", $error_director, $iDirector);
+        textbox_input("nivel", "Nivel", $error_nivel, $iNivel);
+        textbox_input("turno", "Turno", $error_turno, $iTurno);
+        select_input("sostenimiento", array("Público", "Privado"), "Sostenimiento", $error_sostenimiento, $iSostenimiento);
+        textarea_input("direccion", "Dirección", $error_direccion, $iDireccion);
+        textbox_input("region", "Región", $error_region, $iRegion);
+        date_input("fecha", "Fecha de inicio", $error_fecha, $iFecha);
+        number_input("alumnos", "Número de alumnos", $error_alumnos, $iAlumnos);
+        textarea_input("comentarios", "Comentarios", $error_comentarios, $iComentarios);
       ?>
 
       <?php
