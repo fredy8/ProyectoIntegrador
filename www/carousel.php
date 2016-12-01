@@ -12,14 +12,13 @@
   if (!$showFilesId || !$showFilesType || !in_array($showFilesType, $validIdTypes)) {
     $error = true;
   } else {
-    $query = "select id from archivos where " . $showFilesType . "_id='$id' and type in('". implode("','", $imageTypes) . "')";
+    $query = "select id from archivos where " . $showFilesType . "_id='$showFilesId' and type in('". implode("','", $imageTypes) . "')";
     if ($result = $conn->query($query)) {
       while ($row = $result->fetch_assoc()) {
         $numImages++;
         array_push($imageIds, $row['id']);
       }
     } else {
-      echo 'plop2';
       $error = true;
     }
   }

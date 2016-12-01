@@ -59,6 +59,8 @@
           echo '</div>';
         }
         echo '<br>';
+
+        include 'file_list.php';
       }
     ?>
   </div>
