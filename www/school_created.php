@@ -8,7 +8,7 @@
   <?php include 'menu.php'; ?>
   <div class="container">
     <br>
-    Se ha creado la escuela exitosamente. 
+    Se ha agregado la escuela exitosamente. 
     <a href="/schools.php">Regresar</a>
   </div>
 </body>

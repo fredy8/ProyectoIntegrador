@@ -30,31 +30,30 @@
 ?>
 
 <body>
-  <form action="/register.php" method="POST">
-    Correo electrónico:<br>
-    <input type="text" name="email">
-    <?php
-      if ($invalid_email) {
-        echo 'Correo electrónico inválido.';
-      }
-    ?>
-    <br>
-    Constraseña:<br>
-    <input type="password" name="password">
-    <?php
-      if ($invalid_password) {
-        echo 'Contraseña inválida. Debe contener por lo menos 5 caracteres.';
-      }
-    ?>
-    <br>
-    <?php
-      if ($register_error) {
-        echo 'Ya existe un usuario con el correo electrónico.';
-        echo '<br>';
-      }
-    ?>
-    <input type="submit" value="Registrar">
-  </form>
+  <div class="container-fluid">
+    <form style="max-width: 500px; padding: 15px; margin: 0px auto;" action="/register.php" method="POST">
+      <h1>Registro</h1>
+      <div class="form-group">
+        <label class="control-label" for="email">Email</label>
+        <?php
+          if ($invalid_email) {
+            echo 'Correo electrónico inválido.';
+          }
+        ?>
+        <input type="text" class="form-control" id="email" name="email">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="password">Password</label>
+        <?php
+          if ($invalid_password) {
+            echo 'Contraseña inválida. Debe contener por lo menos 5 caracteres.';
+          }
+        ?>
+        <input type="password" class="form-control" id="password" name="password">
+      </div>
+      <input type="submit" class="btn btn-success col-xs-offset-9" value="Solicitar Cuenta">
+    </form>
+  </div>
 </body>
 
 <?php

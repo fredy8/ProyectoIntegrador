@@ -26,7 +26,9 @@
   <?php include 'menu.php'; ?>
   <div class="container">
     <br>
-    <a href="/create_school.php">Crear Escuela</a>
+    <a href="/create_school.php">
+      <button type="button" class="btn btn-success">Agregar Escuela</button>
+    </a>
     <?php
       loadTable();
     ?>

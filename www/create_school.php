@@ -123,8 +123,13 @@
           echo '<br>';
         }
       ?>
-      <a href="schools.php">Cancelar</a>
-      <input type="submit" value="Crear">
+
+      <div style="margin-bottom: 15px;">
+      <a href="/schools.php">
+        <input style="margin-right: 10px" type="button" class="btn btn-danger col-xs-offset-7" value="Cancelar">
+      </a>
+      <input type="submit" class="btn btn-success" value="Agregar">
+      </div>
     </form>
   </div>
 </body>

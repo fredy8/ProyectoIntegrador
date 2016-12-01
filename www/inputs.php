@@ -1,11 +1,20 @@
 <?php
  function field($label, $error, $input) {
-    echo $label . ':';
-    echo $input;
+    echo '<div class="row">';
+
     if ($error) {
-      echo '<font color="red">' . $error . "</font>";
+      echo '<font class="col-xs-offset-4" style="padding-left: 15px;" color="red">' . $error . '</font>';
     }
-    echo '<br>';
+
+    echo '</div>';
+    echo '<div class="row form-group">';
+
+    echo '<label class="col-xs-3 col-xs-offset-1" style="text-align: right;">' . $label .'</label>';
+    echo '<div class="col-xs-5">';
+    echo $input;
+    echo '</div>';
+
+    echo '</div>';
   }
 
   function textbox_input($name, $label, $error, $initial_value = "") {

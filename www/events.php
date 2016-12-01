@@ -26,7 +26,9 @@
   <?php include 'menu.php'; ?>
   <div class="container">
     <br>
-    <a href="/create_event.php">Crear Evento</a>
+    <a href="/create_event.php">
+      <button type="button" class="btn btn-success">Crear Evento</button>
+    </a>
     <?php
       loadTable();
     ?>

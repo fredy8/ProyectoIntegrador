@@ -218,7 +218,7 @@
 <body>
   <?php
     include 'menu.php';
-    <div class="container">
+    echo '<div class="container">';
 
       if ($editing) {
         echo '<form action="/edit_event.php?id=' . $id .'" method="POST">';
@@ -271,7 +271,12 @@
         echo '<input type="submit" value="Guardar">';
       } else {
         textbox_input("correo_electronico", "Agrega tu correo electrónico", $error_correo_electronico, $iCorreo_electronico);
-        echo '<input type="submit" value="Crear">';
+        echo '<div style="margin-bottom: 15px;">';
+        echo '<a href="/events.php">';
+        echo '<input style="margin-right: 10px" type="button" class="btn btn-danger col-xs-offset-7" value="Cancelar">';
+        echo '</a>';
+        echo '<input type="submit" class="btn btn-success" value="Crear">';
+        echo '</div>';
       }
     ?>
     </form>

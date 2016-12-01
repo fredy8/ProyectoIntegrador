@@ -58,6 +58,9 @@
         }
       ?>
       <input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar">
+      <a href="register.php">
+        <input style="margin-top: 20px;" type="button" class="btn btn-lg btn-success btn-block" value="Solicitar cuenta">
+      </a>
     </form>
   </div>
 </body>

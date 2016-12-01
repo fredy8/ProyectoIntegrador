@@ -5,12 +5,8 @@
     header("Location: /home.php");
   }
   include 'header.php';
+  include 'login.php';
 ?>
-
-<body>
-  <a href="login.php">Login</a>
-  <a href="register.php">Register</a>
-</body>
 
 <?php
   include 'footer.php';
