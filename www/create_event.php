@@ -6,6 +6,28 @@
 
   error_reporting( error_reporting() & ~E_NOTICE );
 
+  $error_escuela = NULL;
+  $error_empresa = NULL;
+  $error_gestion = NULL;
+  $error_nombre = NULL;
+  $error_objetivo = NULL;
+  $error_fecha = NULL;
+  $error_hora_inicio = NULL;
+  $error_hora_fin = NULL;
+  $error_lugar = NULL;
+  $error_tematica = NULL;
+  $error_descripcion = NULL;
+  $error_num_alumnos = NULL;
+  $error_num_padres = NULL;
+  $error_num_personal = NULL;
+  $error_num_voluntarios = NULL;
+  $error_institucion = NULL;
+  $error_num_alumnos_servicio = NULL;
+  $error_universidad = NULL;
+  $error_inversion_monetaria = NULL;
+  $error_inversion_monetaria_escuela = NULL;
+  $error_correo_electronico = NULL;
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $iEmpresa = $_POST["empresa"];
     $iEscuela = $_POST["escuela"];
