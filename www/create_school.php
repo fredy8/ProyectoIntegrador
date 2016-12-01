@@ -5,6 +5,17 @@
 
   error_reporting( error_reporting() & ~E_NOTICE );
 
+  $error_nombre = NULL;
+  $error_director = NULL;
+  $error_nivel = NULL;
+  $error_turno = NULL;
+  $error_sostenimiento = NULL;
+  $error_direccion = NULL;
+  $error_region = NULL;
+  $error_fecha = NULL;
+  $error_alumnos = NULL;
+  $error_comentarios = NULL;
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $iNombre = $_POST["nombre"];
     $iDirector = $_POST["director"];
@@ -19,54 +30,38 @@
 
     $valid = true;
 
-    if (!$nombre) {
-      $error_nombre = "Inválido";
-      $valid = false;
-    }
-    if (!$director) {
-      $error_director = "Inválido";
-      $valid = false;
-    }
-    if (!$nivel) {
-      $error_nivel = "Inválido";
-      $valid = false;
-    }
-    if (!$turno) {
-      $error_turno = "Inválido";
-      $valid = false;
-    }
-    if (!$sostenimiento) {
-      $error_sostenimiento = "Inválido";
-      $valid = false;
-    }
-    if (!$direccion) {
-      $error_direccion = "Inválido";
-      $valid = false;
-    }
-    if (!$region) {
-      $error_region = "Inválido";
-      $valid = false;
-    }
-    if (!$fecha) {
-      $error_fecha = "Inválido";
-      $valid = false;
-    }
-    if (!$alumnos) {
-      $error_alumnos = "Inválido";
-      $valid = false;
-    }
-    if (!$comentarios) {
-      $error_comentarios = "Inválido";
-      $valid = false;
-    }
+    if (empty($_POST["nombre"]))
+      $error_nombre = "El nombre no puede estar vacío";
+    if (empty($_POST["director"]))
+      $error_director = "El nombre del director no puede estar vacío";
+    if (empty($_POST["nivel"]))
+      $error_nivel = "El nivel no puede estar vacío";
+    if (empty($_POST["turno"]))
+      $error_turno = "El turno no puede estar vacío";
+    if (empty($_POST["sostenimiento"]))
+      $error_sostenimiento = "El sostenimiento no puede estar vacío";
+    if (empty($_POST["direccion"]))
+      $error_direccion = "La dirección no puede estar vacía";
+    if (empty($_POST["region"]))
+      $error_region = "La región no puede estar vacía";
+    if (empty($_POST["fecha"]) || date_parse($_POST["fecha"]) === false)
+      $error_fecha = "Fecha inválida";
+    if (intval($_POST["alumnos"]) == 0 && $_POST["alumnos"] != "0")
+      $error_alumnos = "El número de alumnos debe ser un número";
+    if (empty($_POST["comentarios"]))
+      $iComentarios = "";
 
-    $query = "insert into escuelas (nombre, director, nivel, turno, sostenimiento, direccion, region, fecha, alumnos, comentarios)"
-      . " values('$nombre', '$director', '$nivel', '$turno', '$sostenimiento'," 
-      . " '$direccion', '$region', '$fecha', $alumnos, '$comentarios')";
-
-    echo $query;
-
-    if ($valid) {
+    if (empty($error_nombre) && empty($error_director) && empty($error_nivel) && empty($error_turno) && empty($error_sostenimiento) 
+      && empty($error_direccion) && empty($error_region) && empty($error_fecha) && empty($error_alumnos)) {
+      if ($editing_school) {
+        $query = "update escuelas set nombre='$iNombre', director='$iDirector', nivel='$iNivel', turno='iTurno',"
+          . " sostenimiento='$iSostenimiento', direccion='$iDireccion', region='$iRegion', fecha='$iFecha', alumnos=$iALumnos,"
+          . " comentarios='$iComentarios' where id=$id";
+      } else {
+        $query = "insert into escuelas (nombre, director, nivel, turno, sostenimiento, direccion, region, fecha, alumnos, comentarios)"
+          . " values('$iNombre', '$iDirector', '$iNivel', '$iTurno', '$iSostenimiento'," 
+          . " '$iDireccion', '$iRegion', '$iFecha', $iAlumnos, '$iComentarios')";
+      }
       if ($conn->query($query)) {
         header("Location: /school_created.php");
       } else {
@@ -88,7 +83,7 @@
         textbox_input("director", "Nombre del director", $error_director, $iDirector);
         textbox_input("nivel", "Nivel", $error_nivel, $iNivel);
         textbox_input("turno", "Turno", $error_turno, $iTurno);
-        select_input("sostenimiento", array("Público", "Privado"), "Sostenimiento", $error_sostenimiento, $iSostenimiento);
+        select_input("sostenimiento", "Sostenimiento", array("Pública", "Privada"), $error_sostenimiento, $iSostenimiento);
         textarea_input("direccion", "Dirección", $error_direccion, $iDireccion);
         textbox_input("region", "Región", $error_region, $iRegion);
         date_input("fecha", "Fecha de inicio", $error_fecha, $iFecha);
