@@ -21,14 +21,13 @@
 
   function loadTable() {
     global $fileRows;
-    $header = ['ID', 'Nombre', 'Tamaño'];
+    $header = ['ID', 'Nombre', 'Tamaño', 'Descargar'];
     $rows = [];
     foreach($fileRows as $row) {
-      $links = [];
-      array_push($rows, [$row['id'], $row['name'], formatBytes($row['size'])]);
-      array_push($links, "download.php?id=" . $row['id']);
+      array_push($rows, 
+        [$row['id'], $row['name'], formatBytes($row['size']), getDownloadButton($row['id'])]);
     }
-    drawTable($header, $rows, $links);
+    drawTable($header, $rows);
   }
 
   function formatBytes($bytes, $precision = 2) { 
@@ -40,7 +39,12 @@
     $bytes /= (1 << (10 * $pow)); 
 
     return round($bytes, $precision) . ' ' . $units[$pow]; 
-} 
+  }
+
+  function getDownloadButton($id) {
+    return '<a href="/download.php?id=' . $id . '">'
+      . '<button type="button" class="btn btn-info">Descargar</button>';
+  }
 
 ?>
 
