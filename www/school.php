@@ -7,6 +7,8 @@
   $nombre = NULL;
 
   $id = $_GET['id'];
+  $showFilesId = $id;
+  $showFilesType = 'escuela';
   if (!$id) {
     header("Location: /schools.php");
   }
@@ -22,7 +24,6 @@
 <body>
   <?php 
     include 'menu.php'; 
-    include 'carousel.php';
     ?>
   <div class="container">
     <br>
@@ -35,6 +36,9 @@
         echo '<a href="/upload_file.php?id=' . $id . '&type=escuela">';
         echo '<button type="button" class="btn btn-info">Agregar archivo/imagen</button>';
         echo '</a>';
+
+        include 'carousel.php';
+
         $fields = [
           ['Nombre', $school["nombre"]],
           ['Director', $school["director"]],
