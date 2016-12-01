@@ -51,3 +51,15 @@ create table eventos (
   correo_electronico varchar(100) not null,
   foreign key (escuela_id) references escuelas(id)
 );
+
+create table archivos (
+  id bigint(20) unsigned not null auto_increment primary key,
+  name varchar(60) not null,
+  type varchar(30) not null,
+  size int not null,
+  content mediumblob not null,
+  escuela_id bigint(20) unsigned default null,
+  evento_id bigint(20) unsigned default null,
+  foreign key (escuela_id) references escuelas(id),
+  foreign key (evento_id) references eventos(id)
+);
