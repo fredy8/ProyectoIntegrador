@@ -245,7 +245,12 @@
       textbox_input("otra_donacion", "Otro tipo de donación", $error_otra_donacion, $iOtra_donacion);
 
       if ($editing) {
-        echo '<input type="submit" value="Guardar">';
+        echo '<div style="margin-bottom: 15px;">';
+        echo '<a href="/event.php?id=' . $id .'">';
+        echo '<input style="margin-right: 10px" type="button" class="btn btn-danger col-xs-offset-7" value="Cancelar">';
+        echo '</a>';
+        echo '<input type="submit" class="btn btn-success" value="Guardar">';
+        echo '</div>';
       } else {
         textbox_input("correo_electronico", "Agrega tu correo electrónico", $error_correo_electronico, $iCorreo_electronico);
         echo '<div style="margin-bottom: 15px;">';
